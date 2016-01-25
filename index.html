@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <!-- Set the base href -->
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    
+    <title>My App</title>
+  
+    
+    <!-- 1. Load libraries -->
+    <script src="node_modules/es6-shim/es6-shim.js"></script>
+    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.js"></script>
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/typescript/lib/typescript.js"></script>
+    
+    <!-- Add the router library -->
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+
+    <style>
+        @import url('global.style.css')
+    </style>
+    
+    <!-- 2. Configure SystemJS -->
+    <script>
+        System.config({
+            transpiler: 'typescript', 
+            typescriptOptions: { emitDecoratorMetadata: true }, 
+            packages: {'app': {defaultExtension: 'ts'}} 
+        });
+        System.import('app/src/boot')
+                .then(null, console.error.bind(console));
+    </script>
+  </head>
+    
+  <body>
+    <my-app></my-app>
+  </body>
+
+</html>

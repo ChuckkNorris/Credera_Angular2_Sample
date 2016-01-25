@@ -1,0 +1,1 @@
+export {CandidateView} from './candidate-view/candidate-view.component';

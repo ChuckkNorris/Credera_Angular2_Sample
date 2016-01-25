@@ -1,0 +1,10 @@
+input {
+    color: slateblue;
+    
+    font-weight: 700;
+}
+
+.MyComponent {
+    background-color: #4AF3AD;;
+    color: #0035FF;
+}

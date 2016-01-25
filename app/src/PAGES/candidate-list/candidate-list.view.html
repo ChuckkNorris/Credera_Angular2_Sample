@@ -1,0 +1,5 @@
+<p>Candidate List</p>
+<div *ngFor="#candidate of candidates" >
+    {{candidate.name}}
+    <candidate-view [candidate]="candidate"></candidate-view>
+</div>
