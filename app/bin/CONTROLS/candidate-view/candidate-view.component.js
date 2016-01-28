@@ -24,6 +24,7 @@ System.register(['angular2/core'], function(exports_1) {
                         moduleId: 'app/src/CONTROLS/candidate-view/',
                         selector: 'candidate-view',
                         templateUrl: 'candidate-view.view.html',
+                        styleUrls: ['./candidate-view.style.css'],
                         inputs: ['candidate']
                     }), 
                     __metadata('design:paramtypes', [])

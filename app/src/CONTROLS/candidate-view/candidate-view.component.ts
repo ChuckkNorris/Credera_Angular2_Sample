@@ -5,6 +5,7 @@ import {Candidate} from '../../MODELS/models.export';
     moduleId: 'app/src/CONTROLS/candidate-view/',
     selector: 'candidate-view',
     templateUrl: 'candidate-view.view.html',
+    styleUrls: ['./candidate-view.style.css'],
     inputs: ['candidate']
 })
 export class CandidateView {

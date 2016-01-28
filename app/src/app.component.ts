@@ -7,6 +7,7 @@ import {AddCandidate, CandidateDetail, CandidateList } from './PAGES/pages.expor
     moduleId: 'app/src/',
     selector: 'my-app',
     templateUrl: 'app.view.html',
+    styleUrls: ['./app.style.css'],
     directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
@@ -21,9 +22,18 @@ import {AddCandidate, CandidateDetail, CandidateList } from './PAGES/pages.expor
         name: 'AddCandidate',
         component: AddCandidate
     }
-  
-    
 ])
 export class AppComponent {
+    private currPage:CurrentPage = CurrentPage.First;
+    setActive(currPageToSet: boolean){
+        // this.currPage = currPageToSet;
+        // window.console.log('Set active hit');
+       // window.console.log(currPageToSet);
+        // window.console.log(this.currPage);
+    }
+}
 
+enum CurrentPage{
+    First = 1,
+    Second = 2
 }

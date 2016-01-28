@@ -1,5 +1,5 @@
 <nav>
-    <a [routerLink]="['CandidateList']">Candidate List</a>
-    <a [routerLink]="['AddCandidate']">Add Candidate</a>
+    <li  [ngClass]="{active: currPage}" ><a [routerLink]="['CandidateList']">Candidate List</a></li>
+    <li><a [routerLink]="['AddCandidate']">Add Candidate</a></li>
 </nav>
 <router-outlet></router-outlet>

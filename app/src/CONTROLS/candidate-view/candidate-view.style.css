@@ -1,0 +1,12 @@
+div {
+    display: inline;
+    /*position: relative;*/
+}
+div span {
+    position: absolute;
+}
+div img {
+    width: 200;
+    height: 200px;
+
+}

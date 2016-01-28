@@ -9,7 +9,7 @@ System.register(['angular2/core', 'angular2/router', './PAGES/pages.export'], fu
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, router_1, pages_export_1;
-    var AppComponent;
+    var AppComponent, CurrentPage;
     return {
         setters:[
             function (core_1_1) {
@@ -24,12 +24,20 @@ System.register(['angular2/core', 'angular2/router', './PAGES/pages.export'], fu
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
+                    this.currPage = CurrentPage.First;
                 }
+                AppComponent.prototype.setActive = function (currPageToSet) {
+                    // this.currPage = currPageToSet;
+                    // window.console.log('Set active hit');
+                    // window.console.log(currPageToSet);
+                    // window.console.log(this.currPage);
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         moduleId: 'app/src/',
                         selector: 'my-app',
                         templateUrl: 'app.view.html',
+                        styleUrls: ['./app.style.css'],
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([
@@ -50,6 +58,10 @@ System.register(['angular2/core', 'angular2/router', './PAGES/pages.export'], fu
                 return AppComponent;
             })();
             exports_1("AppComponent", AppComponent);
+            (function (CurrentPage) {
+                CurrentPage[CurrentPage["First"] = 1] = "First";
+                CurrentPage[CurrentPage["Second"] = 2] = "Second";
+            })(CurrentPage || (CurrentPage = {}));
         }
     }
 });
