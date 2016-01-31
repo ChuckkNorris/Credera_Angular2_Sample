@@ -9,7 +9,7 @@ System.register(['angular2/http', 'angular2/core'], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var http_1, core_1;
-    var RestApiService;
+    var RestApiService, RestRequest;
     return {
         setters:[
             function (http_1_1) {
@@ -22,13 +22,59 @@ System.register(['angular2/http', 'angular2/core'], function(exports_1) {
             RestApiService = (function () {
                 function RestApiService(_http) {
                     this._http = _http;
+                    // Sent with each request
+                    this.globalParameters = {};
                 }
-                RestApiService.prototype.DoSomething = function () {
-                    window.console.log('Doing Something in RestApiService');
-                    this._http.get('https://api.themoviedb.org/3/movie/551?api_key=1d24f7e213bcc3fc22382ffbf01e4cb2').subscribe(function (response) {
-                        return window.console.log(response.json());
+                Object.defineProperty(RestApiService.prototype, "baseUrl", {
+                    get: function () {
+                        return this._baseUrl;
+                    },
+                    set: function (v) {
+                        // remove last '/'
+                        if (v.lastIndexOf('/') == v.length - 1)
+                            v = v.substr(0, v.length - 1);
+                        this._baseUrl = v;
+                        window.console.log(this._baseUrl);
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                RestApiService.prototype.executeRequest = function (request) {
+                    var getStatement = this._http.get(this.getFullUrl(request));
+                    var promiseToReturn = new Promise(function (resolve) {
+                        return getStatement.subscribe((function (response) {
+                            window.console.log(response.json());
+                            resolve(response.json());
+                        }));
                     });
-                    return true;
+                    return promiseToReturn;
+                };
+                RestApiService.prototype.getFullUrl = function (restRequest) {
+                    var toReturn = this.baseUrl;
+                    if (restRequest.endPoint != undefined)
+                        toReturn += restRequest.endPoint;
+                    toReturn += this.getQueryString(restRequest.parameters);
+                    window.console.log('REST URL: ' + toReturn);
+                    return toReturn;
+                };
+                RestApiService.prototype.getQueryString = function (restRequestParameters) {
+                    var toReturn = '?';
+                    var isFirst = true;
+                    for (var key in this.globalParameters) {
+                        if (!isFirst)
+                            toReturn += '&';
+                        else
+                            isFirst = false;
+                        toReturn += key + '=' + this.globalParameters[key];
+                    }
+                    for (var key in restRequestParameters) {
+                        if (!isFirst)
+                            toReturn += '&';
+                        else
+                            isFirst = false;
+                        toReturn += key + '=' + restRequestParameters[key];
+                    }
+                    return toReturn;
                 };
                 RestApiService = __decorate([
                     core_1.Injectable(), 
@@ -37,6 +83,26 @@ System.register(['angular2/http', 'angular2/core'], function(exports_1) {
                 return RestApiService;
             })();
             exports_1("RestApiService", RestApiService);
+            RestRequest = (function () {
+                function RestRequest() {
+                    this.parameters = {};
+                }
+                Object.defineProperty(RestRequest.prototype, "endPoint", {
+                    get: function () {
+                        return this._endPoint;
+                    },
+                    set: function (v) {
+                        if (v.charAt(0) != '/')
+                            v = '/' + v;
+                        this._endPoint = v;
+                        window.console.log('ENDPOINT: ' + this._endPoint);
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                return RestRequest;
+            })();
+            exports_1("RestRequest", RestRequest);
         }
     }
 });

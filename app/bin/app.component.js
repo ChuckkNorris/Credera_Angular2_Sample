@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'pages'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', './PAGES/Pages.export'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', 'pages'], function(exports_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, pages_1;
+    var core_1, router_1, Pages_export_1;
     var AppComponent, CurrentPage;
     return {
         setters:[
@@ -18,8 +18,8 @@ System.register(['angular2/core', 'angular2/router', 'pages'], function(exports_
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (pages_1_1) {
-                pages_1 = pages_1_1;
+            function (Pages_export_1_1) {
+                Pages_export_1 = Pages_export_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -44,13 +44,18 @@ System.register(['angular2/core', 'angular2/router', 'pages'], function(exports_
                         {
                             path: '/CandidateList',
                             name: 'CandidateList',
-                            useAsDefault: true,
-                            component: pages_1.CandidateList
+                            component: Pages_export_1.CandidateList
                         },
                         {
                             path: '/AddCandidate',
                             name: 'AddCandidate',
-                            component: pages_1.AddCandidate
+                            component: Pages_export_1.AddCandidate
+                        },
+                        {
+                            path: '/MovieList',
+                            name: 'MovieList',
+                            useAsDefault: true,
+                            component: Pages_export_1.MovieList
                         }
                     ]), 
                     __metadata('design:paramtypes', [])

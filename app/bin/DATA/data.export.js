@@ -10,4 +10,4 @@ System.register(['./candidates.data'], function(exports_1) {
         }
     }
 });
-//# sourceMappingURL=DATA.export.js.map
+//# sourceMappingURL=data.export.js.map

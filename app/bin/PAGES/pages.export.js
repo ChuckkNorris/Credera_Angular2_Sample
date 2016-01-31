@@ -1,4 +1,4 @@
-System.register(['./add-candidate/add-candidate.component', './candidate-detail/candidate-detail.component', './candidate-list/candidate-list.component'], function(exports_1) {
+System.register(['./add-candidate/add-candidate.component', './candidate-detail/candidate-detail.component', './candidate-list/candidate-list.component', './movie-list/movie-list.component'], function(exports_1) {
     return {
         setters:[
             function (add_candidate_component_1_1) {
@@ -15,9 +15,14 @@ System.register(['./add-candidate/add-candidate.component', './candidate-detail/
                 exports_1({
                     "CandidateList": candidate_list_component_1_1["CandidateList"]
                 });
+            },
+            function (movie_list_component_1_1) {
+                exports_1({
+                    "MovieList": movie_list_component_1_1["MovieList"]
+                });
             }],
         execute: function() {
         }
     }
 });
-//# sourceMappingURL=PAGES.export.js.map
+//# sourceMappingURL=Pages.export.js.map

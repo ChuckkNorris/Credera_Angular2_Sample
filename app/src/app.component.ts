@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {AddCandidate, CandidateDetail, CandidateList } from 'pages';
+import {AddCandidate, CandidateDetail, CandidateList, MovieList} from './PAGES/Pages.export';
 
 
 @Component({
@@ -14,13 +14,18 @@ import {AddCandidate, CandidateDetail, CandidateList } from 'pages';
     {
         path: '/CandidateList',
         name: 'CandidateList',
-        useAsDefault: true,
         component: CandidateList
     },
-        {
+    {
         path: '/AddCandidate',
         name: 'AddCandidate',
         component: AddCandidate
+    },
+        {
+        path: '/MovieList',
+        name: 'MovieList',
+        useAsDefault: true,
+        component: MovieList
     }
 ])
 export class AppComponent {

@@ -1,18 +1,17 @@
 import { Component, OnInit } from 'angular2/core';
 import { CANDIDATES } from '../../DATA/data.export';
 import { CandidateView } from '../../CONTROLS/controls.export';
-import { RestApiService } from '../../SERVICES/Services.export';
+
 
 @Component({
     moduleId: 'app/src/pages/candidate-list/',
     selector: 'candidate-list',
     templateUrl: 'candidate-list.view.html',
-    providers: [RestApiService],
     directives: [CandidateView]
 })
 export class CandidateList implements OnInit {
 
-    constructor(private _rest: RestApiService) {}
+    constructor() {}
     ngOnInit() {
         CANDIDATES.push({
             name: "Dylan T-Dossg",
@@ -21,9 +20,9 @@ export class CandidateList implements OnInit {
             description: 'Levi Fuller aka Vanilla Ice is a Tech Consultant at Credera. He likes long walks on the beach',
             tags: ['.NET', 'Software Engineer', 'Microsoft', 'C#']
         });
-        this._rest.DoSomething();
-        
     }
+    
+
     private candidates = CANDIDATES;
     
 }

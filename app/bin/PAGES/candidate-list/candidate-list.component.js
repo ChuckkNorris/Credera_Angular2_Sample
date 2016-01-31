@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../../DATA/data.export', '../../CONTROLS/controls.export', '../../SERVICES/Services.export'], function(exports_1) {
+System.register(['angular2/core', '../../DATA/data.export', '../../CONTROLS/controls.export'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', '../../DATA/data.export', '../../CONTROLS/cont
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, data_export_1, controls_export_1, Services_export_1;
+    var core_1, data_export_1, controls_export_1;
     var CandidateList;
     return {
         setters:[
@@ -20,14 +20,10 @@ System.register(['angular2/core', '../../DATA/data.export', '../../CONTROLS/cont
             },
             function (controls_export_1_1) {
                 controls_export_1 = controls_export_1_1;
-            },
-            function (Services_export_1_1) {
-                Services_export_1 = Services_export_1_1;
             }],
         execute: function() {
             CandidateList = (function () {
-                function CandidateList(_rest) {
-                    this._rest = _rest;
+                function CandidateList() {
                     this.candidates = data_export_1.CANDIDATES;
                 }
                 CandidateList.prototype.ngOnInit = function () {
@@ -38,17 +34,15 @@ System.register(['angular2/core', '../../DATA/data.export', '../../CONTROLS/cont
                         description: 'Levi Fuller aka Vanilla Ice is a Tech Consultant at Credera. He likes long walks on the beach',
                         tags: ['.NET', 'Software Engineer', 'Microsoft', 'C#']
                     });
-                    this._rest.DoSomething();
                 };
                 CandidateList = __decorate([
                     core_1.Component({
                         moduleId: 'app/src/pages/candidate-list/',
                         selector: 'candidate-list',
                         templateUrl: 'candidate-list.view.html',
-                        providers: [Services_export_1.RestApiService],
                         directives: [controls_export_1.CandidateView]
                     }), 
-                    __metadata('design:paramtypes', [Services_export_1.RestApiService])
+                    __metadata('design:paramtypes', [])
                 ], CandidateList);
                 return CandidateList;
             })();

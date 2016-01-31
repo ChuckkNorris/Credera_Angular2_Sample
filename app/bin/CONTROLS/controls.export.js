@@ -10,4 +10,4 @@ System.register(['./candidate-view/candidate-view.component'], function(exports_
         }
     }
 });
-//# sourceMappingURL=CONTROLS.export.js.map
+//# sourceMappingURL=controls.export.js.map
