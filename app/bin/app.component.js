@@ -42,21 +42,16 @@ System.register(['angular2/core', 'angular2/router', './PAGES/Pages.export'], fu
                     }),
                     router_1.RouteConfig([
                         {
-                            path: '/CandidateList',
-                            name: 'CandidateList',
-                            component: Pages_export_1.CandidateList
-                        },
-                        {
-                            path: '/AddCandidate',
-                            name: 'AddCandidate',
-                            component: Pages_export_1.AddCandidate
-                        },
-                        {
                             path: '/MovieList',
                             name: 'MovieList',
                             useAsDefault: true,
                             component: Pages_export_1.MovieList
-                        }
+                        },
+                        {
+                            path: '/MovieDetail',
+                            name: 'MovieDetail',
+                            component: Pages_export_1.MovieDetail
+                        },
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

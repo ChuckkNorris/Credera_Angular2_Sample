@@ -9,29 +9,29 @@ System.register(['angular2/core'], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var CandidateView;
+    var MovieItem;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            CandidateView = (function () {
-                function CandidateView() {
+            MovieItem = (function () {
+                function MovieItem() {
                 }
-                CandidateView = __decorate([
+                MovieItem = __decorate([
                     core_1.Component({
-                        moduleId: 'app/src/CONTROLS/candidate-view/',
-                        selector: 'candidate-view',
-                        templateUrl: 'candidate-view.view.html',
-                        styleUrls: ['./candidate-view.style.css'],
-                        inputs: ['candidate']
+                        moduleId: 'app/src/CONTROLS/movie-item/',
+                        selector: 'movie-item',
+                        templateUrl: 'movie-item.view.html',
+                        styleUrls: ['./movie-item.style.css'],
+                        inputs: ['movie']
                     }), 
                     __metadata('design:paramtypes', [])
-                ], CandidateView);
-                return CandidateView;
+                ], MovieItem);
+                return MovieItem;
             })();
-            exports_1("CandidateView", CandidateView);
+            exports_1("MovieItem", MovieItem);
         }
     }
 });

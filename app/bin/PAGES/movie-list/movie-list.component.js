@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../../SERVICES/services.export'], function(exports_1) {
+System.register(['angular2/core', '../../SERVICES/services.export', '../../TEMPLATES/templates.export'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', '../../SERVICES/services.export'], function(ex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, services_export_1;
+    var core_1, services_export_1, templates_export_1;
     var MovieList;
     return {
         setters:[
@@ -17,24 +17,40 @@ System.register(['angular2/core', '../../SERVICES/services.export'], function(ex
             },
             function (services_export_1_1) {
                 services_export_1 = services_export_1_1;
+            },
+            function (templates_export_1_1) {
+                templates_export_1 = templates_export_1_1;
             }],
         execute: function() {
             MovieList = (function () {
                 function MovieList(_movieDb) {
                     this._movieDb = _movieDb;
+                    //private myMovie: Movie;
+                    this.myMovies = [];
                 }
                 MovieList.prototype.ngOnInit = function () {
+                    var _this = this;
                     window.console.log('MovieList');
-                    this._movieDb.getMovie().then(function (movie) {
-                        window.console.log(movie);
-                        window.console.log(movie.movie_results[0].title);
-                    });
+                    // this._movieDb.getMovie().then(movie => {
+                    //     this.myMovie = movie;
+                    //     window.console.log(movie.title);
+                    //     window.console.log(movie.backdropUrl);
+                    // });
+                    for (var i = 1; i < 10; i++) {
+                        this._movieDb.getTopMovies(i).then(function (movies) {
+                            movies.forEach(function (movie) {
+                                _this.myMovies.push(movie);
+                                window.console.log(movie);
+                            });
+                        });
+                    }
                 };
                 MovieList = __decorate([
                     core_1.Component({
                         moduleId: 'app/src/PAGES/movie-list/',
                         selector: 'movie-list',
                         providers: [services_export_1.MovieDbService],
+                        directives: [templates_export_1.MovieItem],
                         templateUrl: 'movie-list.view.html'
                     }), 
                     __metadata('design:paramtypes', [services_export_1.MovieDbService])

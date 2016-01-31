@@ -1,7 +1,8 @@
 
 export interface Movie {
     title: string;
-    poster: string;
+    backdropUrl: string;
+    posterUrl: string;
 }
 
 export interface MovieResponse {
@@ -12,4 +13,8 @@ export interface MovieResponse {
 
 export interface MovieDbResponse {
     movie_results: MovieResponse[];
+}
+
+export interface MovieResult {
+    results: MovieResponse[];
 }

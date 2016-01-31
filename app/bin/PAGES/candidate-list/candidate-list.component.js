@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../../DATA/data.export', '../../CONTROLS/controls.export'], function(exports_1) {
+System.register(['angular2/core', '../../DATA/data.export', '../../TEMPLATES/templates.export'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', '../../DATA/data.export', '../../CONTROLS/cont
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, data_export_1, controls_export_1;
+    var core_1, data_export_1, templates_export_1;
     var CandidateList;
     return {
         setters:[
@@ -18,8 +18,8 @@ System.register(['angular2/core', '../../DATA/data.export', '../../CONTROLS/cont
             function (data_export_1_1) {
                 data_export_1 = data_export_1_1;
             },
-            function (controls_export_1_1) {
-                controls_export_1 = controls_export_1_1;
+            function (templates_export_1_1) {
+                templates_export_1 = templates_export_1_1;
             }],
         execute: function() {
             CandidateList = (function () {
@@ -40,7 +40,7 @@ System.register(['angular2/core', '../../DATA/data.export', '../../CONTROLS/cont
                         moduleId: 'app/src/pages/candidate-list/',
                         selector: 'candidate-list',
                         templateUrl: 'candidate-list.view.html',
-                        directives: [controls_export_1.CandidateView]
+                        directives: [templates_export_1.CandidateView]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], CandidateList);

@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {AddCandidate, CandidateDetail, CandidateList, MovieList} from './PAGES/Pages.export';
+import {MovieList, MovieDetail } from './PAGES/Pages.export';
 
 
 @Component({
@@ -11,22 +11,19 @@ import {AddCandidate, CandidateDetail, CandidateList, MovieList} from './PAGES/P
     directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
+
     {
-        path: '/CandidateList',
-        name: 'CandidateList',
-        component: CandidateList
-    },
-    {
-        path: '/AddCandidate',
-        name: 'AddCandidate',
-        component: AddCandidate
-    },
-        {
         path: '/MovieList',
         name: 'MovieList',
         useAsDefault: true,
         component: MovieList
-    }
+    },
+    {
+        path: '/MovieDetail',
+        name: 'MovieDetail',
+        component: MovieDetail
+    },
+ 
 ])
 export class AppComponent {
     private currPage:CurrentPage = CurrentPage.First;
