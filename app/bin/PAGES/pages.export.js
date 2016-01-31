@@ -20,4 +20,4 @@ System.register(['./add-candidate/add-candidate.component', './candidate-detail/
         }
     }
 });
-//# sourceMappingURL=pages.export.js.map
+//# sourceMappingURL=PAGES.export.js.map

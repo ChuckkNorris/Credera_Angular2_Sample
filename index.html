@@ -28,7 +28,10 @@
         System.config({
             transpiler: 'typescript', 
             typescriptOptions: { emitDecoratorMetadata: true }, 
-            packages: {'app': {defaultExtension: 'ts'}} 
+            packages: {'app': {defaultExtension: 'ts'}},
+            map: {
+                'pages': 'app/src/PAGES/pages.export.ts'
+            }
         });
         System.import('app/src/boot')
                 .then(null, console.error.bind(console));

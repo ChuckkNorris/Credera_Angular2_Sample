@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {AddCandidate, CandidateDetail, CandidateList } from './PAGES/pages.export';
+import {AddCandidate, CandidateDetail, CandidateList } from 'pages';
 
 
 @Component({
