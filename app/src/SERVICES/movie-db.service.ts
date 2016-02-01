@@ -42,11 +42,7 @@ export class MovieDbService {
         var promiseToReturn = new Promise<Movie>(resolve => 
             this._movieDbRest.executeRequest<MovieDbResponse>(movieRequest).then(movie => {
                 var currMovie = movie.movie_results[0];
-                var toReturn: Movie = {
-                    title: currMovie.title,
-                    backdropUrl: POSTER_BASE_URL + currMovie.backdrop_path,
-                    posterUrl: POSTER_BASE_URL + currMovie.poster_path
-                }
+                var toReturn: Movie = this.convertToMovie(currMovie);
                 resolve(toReturn);
             }
         ));
@@ -58,7 +54,12 @@ export class MovieDbService {
         var toReturn: Movie = {
             title: movie.title,
             backdropUrl: POSTER_BASE_URL + movie.backdrop_path,
-            posterUrl: POSTER_BASE_URL + movie.poster_path
+            posterUrl: POSTER_BASE_URL + movie.poster_path,
+            overview: movie.overview,
+            popularity: movie.popularity,
+            releaseDate: movie.release_date,
+            voteAverage: movie.vote_average,
+            voteCount: movie.vote_count
         };
         return toReturn;
     }

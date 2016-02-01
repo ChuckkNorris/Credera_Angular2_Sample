@@ -1,3 +1,11 @@
-<p>TEMPLATE</p>
-<movie-item *ngFor="#movie of myMovies" [movie]="movie"></movie-item>
+<div (window:scroll)="onScroll($event)">
+    <movie-detail 
+        *ngIf="selectedMovie"
+        (close)="closeDetails()"
+        [movie]="selectedMovie">
+    </movie-detail>
+    <div class="overlay"></div>
+    <movie-item *ngFor="#movie of myMovies" (click)="showDetails(movie)"  [movie]="movie" ></movie-item>
+    
+</div>
 

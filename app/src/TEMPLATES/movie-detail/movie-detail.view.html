@@ -1,0 +1,16 @@
+<div class="popup" *ngIf="movie">
+    <button 
+        (click)="closeDetails()"
+        class="close-button">X</button>
+    <div class="container">
+        <img  [src]="movie.backdropUrl"/>
+    </div>
+    <!--<div class="overlay"></div>-->
+    <div class="text">
+        <p class="title">{{movie.title}}</p>
+        <p>{{movie.overview}}</p>
+        <p>{{movie.voteAverage}}</p>
+        <p>{{movie.releaseDate}}</p>
+    </div>
+   
+</div>

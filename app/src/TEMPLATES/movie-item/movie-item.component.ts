@@ -9,5 +9,7 @@ import {Movie} from '../../MODELS/models.export';
     inputs: ['movie']
 })
 export class MovieItem {
-    private movie: MovieItem;
+    private movie: Movie;
+    
+
 }

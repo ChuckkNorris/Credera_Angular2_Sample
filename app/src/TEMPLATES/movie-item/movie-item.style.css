@@ -1,12 +1,26 @@
 div {
     display: inline;
+    padding: 2px;
     /*position: relative;*/
 }
 div span {
-    position: absolute;
+    /*float: left;*/
+    position: fixed;
+    text-overflow: ellipsis;
+    width: 200;
 }
 div img {
+    /*float: left;*/
     width: 200;
-    height: 200px;
-
+    height: 300px;
+    /*display: inline-block;*/
 }
+
+/*.fixedContainer {
+    background-color:#ddd;
+    position: fixed;
+    padding: 2em;
+    left: 50%;
+    top: 0%;
+    transform: translateX(-50%);
+}*/

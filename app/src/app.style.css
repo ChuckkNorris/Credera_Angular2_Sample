@@ -1,12 +1,14 @@
 nav {
     background: #f96e5b;
     width: auto;
-        list-style: none;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-  display: block;
-  zoom: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    display: block;
+    zoom: 1;
+    position: fixed;
+    top: 0;
 }
 nav:after {
   content: " ";
@@ -121,3 +123,8 @@ nav.align-right li:first-child a:after {
     display: none;
   }
 }
+
+div {
+    margin-top: 44px;
+}
+

@@ -27,22 +27,38 @@ System.register(['angular2/core', '../../SERVICES/services.export', '../../TEMPL
                     this._movieDb = _movieDb;
                     //private myMovie: Movie;
                     this.myMovies = [];
+                    this.nextPage = 1;
                 }
                 MovieList.prototype.ngOnInit = function () {
+                    for (var i = 1; i < 5; i++) {
+                        this.getNextPageOfTopMovies();
+                    }
+                };
+                MovieList.prototype.showDetails = function (movie) {
+                    console.log('SHOW ME THE DETAILS!');
+                    this.selectedMovie = movie;
+                };
+                MovieList.prototype.closeDetails = function () {
+                    console.log('Close details from movie list');
+                    this.selectedMovie = undefined;
+                };
+                MovieList.prototype.getNextPageOfTopMovies = function () {
                     var _this = this;
-                    window.console.log('MovieList');
-                    // this._movieDb.getMovie().then(movie => {
-                    //     this.myMovie = movie;
-                    //     window.console.log(movie.title);
-                    //     window.console.log(movie.backdropUrl);
-                    // });
-                    for (var i = 1; i < 10; i++) {
-                        this._movieDb.getTopMovies(i).then(function (movies) {
-                            movies.forEach(function (movie) {
-                                _this.myMovies.push(movie);
-                                window.console.log(movie);
-                            });
+                    this._movieDb.getTopMovies(this.nextPage).then(function (movies) {
+                        window.console.log('GETTING PAGE: ' + _this.nextPage);
+                        movies.forEach(function (movie) {
+                            _this.myMovies.push(movie);
                         });
+                    });
+                    this.nextPage++;
+                };
+                MovieList.prototype.onScroll = function (event) {
+                    var scroll = event.target.scrollingElement;
+                    var currentScrollPosition = scroll.clientHeight + scroll.scrollTop;
+                    var maxScrollPosition = scroll.scrollHeight;
+                    if (currentScrollPosition >= (.9 * maxScrollPosition)) {
+                        window.console.log('GETTTING MOVIES: ' + this.nextPage);
+                        this.getNextPageOfTopMovies();
                     }
                 };
                 MovieList = __decorate([
@@ -50,7 +66,7 @@ System.register(['angular2/core', '../../SERVICES/services.export', '../../TEMPL
                         moduleId: 'app/src/PAGES/movie-list/',
                         selector: 'movie-list',
                         providers: [services_export_1.MovieDbService],
-                        directives: [templates_export_1.MovieItem],
+                        directives: [templates_export_1.MovieItem, templates_export_1.MovieDetail],
                         templateUrl: 'movie-list.view.html'
                     }), 
                     __metadata('design:paramtypes', [services_export_1.MovieDbService])

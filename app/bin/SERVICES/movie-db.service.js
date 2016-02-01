@@ -57,11 +57,7 @@ System.register(['angular2/core', './rest-api.service'], function(exports_1) {
                     var promiseToReturn = new Promise(function (resolve) {
                         return _this._movieDbRest.executeRequest(movieRequest).then(function (movie) {
                             var currMovie = movie.movie_results[0];
-                            var toReturn = {
-                                title: currMovie.title,
-                                backdropUrl: POSTER_BASE_URL + currMovie.backdrop_path,
-                                posterUrl: POSTER_BASE_URL + currMovie.poster_path
-                            };
+                            var toReturn = _this.convertToMovie(currMovie);
                             resolve(toReturn);
                         });
                     });
@@ -71,7 +67,12 @@ System.register(['angular2/core', './rest-api.service'], function(exports_1) {
                     var toReturn = {
                         title: movie.title,
                         backdropUrl: POSTER_BASE_URL + movie.backdrop_path,
-                        posterUrl: POSTER_BASE_URL + movie.poster_path
+                        posterUrl: POSTER_BASE_URL + movie.poster_path,
+                        overview: movie.overview,
+                        popularity: movie.popularity,
+                        releaseDate: movie.release_date,
+                        voteAverage: movie.vote_average,
+                        voteCount: movie.vote_count
                     };
                     return toReturn;
                 };
