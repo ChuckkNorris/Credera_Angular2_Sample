@@ -1,3 +1,11 @@
-<div *ngIf="movie">
-    <img [src]="movie.posterUrl"/>
+<div class="container" *ngIf="movie">
+   <div>
+       <img [src]="movie.posterUrl"/>
+        <div class="title" >
+            {{movie.title}}
+        </div>
+    </div>
+    
+    <div>{{movie.voteAverage}}</div>
+    <!--<div class="rating"></div>-->
 </div>

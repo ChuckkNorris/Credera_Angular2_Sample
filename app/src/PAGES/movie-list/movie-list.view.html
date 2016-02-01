@@ -5,7 +5,10 @@
         [movie]="selectedMovie">
     </movie-detail>
     <div class="overlay"></div>
-    <movie-item *ngFor="#movie of myMovies" (click)="showDetails(movie)"  [movie]="movie" ></movie-item>
+    <movie-item *ngFor="#movie of myMovies" 
+        (click)="showDetails(movie)" 
+        [movie]="movie">
+    </movie-item>
     
 </div>
 

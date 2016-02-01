@@ -25,6 +25,7 @@ export class MovieList implements OnInit {
     private selectedMovie:Movie;
     showDetails(movie: Movie){
         console.log('SHOW ME THE DETAILS!');
+        this._movieDb.getFullMovieDetails(movie.id.toString());
         this.selectedMovie = movie;
     }
     

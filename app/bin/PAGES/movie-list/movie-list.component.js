@@ -36,6 +36,7 @@ System.register(['angular2/core', '../../SERVICES/services.export', '../../TEMPL
                 };
                 MovieList.prototype.showDetails = function (movie) {
                     console.log('SHOW ME THE DETAILS!');
+                    this._movieDb.getFullMovieDetails(movie.id.toString());
                     this.selectedMovie = movie;
                 };
                 MovieList.prototype.closeDetails = function () {

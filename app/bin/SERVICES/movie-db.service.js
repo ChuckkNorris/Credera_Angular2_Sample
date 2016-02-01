@@ -9,7 +9,7 @@ System.register(['angular2/core', './rest-api.service'], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, rest_api_service_1;
-    var POSTER_BASE_URL, MOVIE_DB_API_KEY, MOVIE_DB_BASE_URL, MovieDbService;
+    var POSTER_BASE_URL, MOVIE_DB_API_KEY, MOVIE_DB_BASE_URL, OMDB_BASE_URL, MovieDbService;
     return {
         setters:[
             function (core_1_1) {
@@ -22,14 +22,30 @@ System.register(['angular2/core', './rest-api.service'], function(exports_1) {
             POSTER_BASE_URL = 'http://image.tmdb.org/t/p/w500';
             MOVIE_DB_API_KEY = '1d24f7e213bcc3fc22382ffbf01e4cb2';
             MOVIE_DB_BASE_URL = 'https://api.themoviedb.org/3';
+            OMDB_BASE_URL = 'http://www.omdbapi.com';
             MovieDbService = (function () {
                 function MovieDbService(_movieDbRest) {
                     this._movieDbRest = _movieDbRest;
                     this.onInit();
                 }
+                // private _omdbService: OmdbService
                 MovieDbService.prototype.onInit = function () {
                     this._movieDbRest.globalParameters['api_key'] = MOVIE_DB_API_KEY;
                     this._movieDbRest.baseUrl = MOVIE_DB_BASE_URL;
+                };
+                // - GET MOVIE - //
+                MovieDbService.prototype.getFullMovieDetails = function (id) {
+                    var _this = this;
+                    var movieDbRequest = new rest_api_service_1.RestRequest();
+                    movieDbRequest.endPoint = '/movie/' + id;
+                    var promiseToReturn = new Promise(function (resolve) {
+                        return _this._movieDbRest.executeRequest(movieDbRequest).then(function (movieResponse) {
+                            window.console.log('MOVIEDB: ' + movieResponse);
+                            var movieDbMovie = _this.convertToMovie(movieResponse);
+                            // this._omdbService.getFullMovieDetails(movieDbMovie).then(toReturn => resolve(toReturn));
+                        });
+                    });
+                    return promiseToReturn;
                 };
                 // - TOP MOVIES - //
                 MovieDbService.prototype.getTopMovies = function (pageCount) {
@@ -48,23 +64,10 @@ System.register(['angular2/core', './rest-api.service'], function(exports_1) {
                     });
                     return promiseToReturn;
                 };
-                // - GET MOVIE - //
-                MovieDbService.prototype.getMovie = function () {
-                    var _this = this;
-                    var movieRequest = new rest_api_service_1.RestRequest();
-                    movieRequest.endPoint = '/find/tt1431045';
-                    movieRequest.parameters['external_source'] = 'imdb_id';
-                    var promiseToReturn = new Promise(function (resolve) {
-                        return _this._movieDbRest.executeRequest(movieRequest).then(function (movie) {
-                            var currMovie = movie.movie_results[0];
-                            var toReturn = _this.convertToMovie(currMovie);
-                            resolve(toReturn);
-                        });
-                    });
-                    return promiseToReturn;
-                };
                 MovieDbService.prototype.convertToMovie = function (movie) {
                     var toReturn = {
+                        id: movie.id,
+                        imdb_id: movie.imdb_id,
                         title: movie.title,
                         backdropUrl: POSTER_BASE_URL + movie.backdrop_path,
                         posterUrl: POSTER_BASE_URL + movie.poster_path,
