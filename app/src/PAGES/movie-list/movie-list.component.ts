@@ -23,10 +23,12 @@ export class MovieList implements OnInit {
     }
     
     private selectedMovie:Movie;
-    showDetails(movie: Movie){
+    showDetails(movieId: number){
         console.log('SHOW ME THE DETAILS!');
-        this._movieDb.getFullMovieDetails(movie.id.toString());
-        this.selectedMovie = movie;
+         this._movieDb.getFullMovieDetails(movieId.toString()).then(movie => 
+            this.selectedMovie = movie
+         );
+        
     }
     
     closeDetails(){
@@ -40,7 +42,9 @@ export class MovieList implements OnInit {
         this._movieDb.getTopMovies(this.nextPage).then(movies => {
             window.console.log('GETTING PAGE: ' + this.nextPage);
                 movies.forEach(movie => {
-                    this.myMovies.push(movie);
+                    this._movieDb.getFullMovieDetails(movie.id.toString()).then(fullMovie => 
+                        this.myMovies.push(fullMovie)
+                    );
                 })
         });
         this.nextPage++;

@@ -10,10 +10,14 @@ export interface Movie {
     releaseDate: string;
     voteAverage: number;
     voteCount: number;
-    imdbRating?: string;
-    tomatoRating?: string;
-    tomatoUserRating?: string;
-    metaRating?: string;
+    imdbRating?: number;
+    tomatoCriticRating?: number;
+    tomatoUserRating?: number;
+    metaRating?: number;
+    superRating?: number;
+    
+    genre?: string[];
+    year?: number;
 }
 
 export interface MovieResponse {

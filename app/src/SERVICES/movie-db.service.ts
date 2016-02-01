@@ -11,8 +11,11 @@ const OMDB_BASE_URL: string = 'http://www.omdbapi.com';
 @Injectable()
 export class MovieDbService {
 
-    constructor(private _movieDbRest: RestApiService){this.onInit();}
-    // private _omdbService: OmdbService
+    constructor(
+        private _movieDbRest: RestApiService,
+        private _omdbService: OmdbService
+    ){this.onInit();}
+    
     onInit() {
         this._movieDbRest.globalParameters['api_key'] = MOVIE_DB_API_KEY;
         this._movieDbRest.baseUrl = MOVIE_DB_BASE_URL;
@@ -21,13 +24,17 @@ export class MovieDbService {
     
     // - GET MOVIE - //
     public getFullMovieDetails(id: string) : Promise<Movie> {
+        this._movieDbRest.baseUrl = MOVIE_DB_BASE_URL;
         var movieDbRequest = new RestRequest();
         movieDbRequest.endPoint = '/movie/' + id;
         var promiseToReturn = new Promise<Movie>(resolve => 
             this._movieDbRest.executeRequest<MovieResponse>(movieDbRequest).then(movieResponse => {
                 window.console.log('MOVIEDB: '+ movieResponse); 
                 var movieDbMovie = this.convertToMovie(movieResponse);
-               // this._omdbService.getFullMovieDetails(movieDbMovie).then(toReturn => resolve(toReturn));
+                this._omdbService.getFullMovieDetails(movieDbMovie).then(toReturn => {
+                    console.log(toReturn);
+                    resolve(toReturn);
+                });
             }
         ));
         return promiseToReturn;
@@ -35,6 +42,8 @@ export class MovieDbService {
     
     // - TOP MOVIES - //
     public getTopMovies(pageCount: number): Promise<Movie[]> {
+        this._movieDbRest.globalParameters['api_key'] = MOVIE_DB_API_KEY;
+        this._movieDbRest.baseUrl = MOVIE_DB_BASE_URL;
         var request = new RestRequest();
         request.endPoint = '/movie/top_rated';
         request.parameters['page'] = pageCount.toString();

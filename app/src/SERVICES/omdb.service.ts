@@ -16,6 +16,8 @@ export class OmdbService {
     
     // - GET MOVIE - //
     public getFullMovieDetails(movieDbMovie: Movie) : Promise<Movie> {
+        this._omdbRest.baseUrl = OMDB_BASE_URL;
+        this._omdbRest.globalParameters['r'] = 'JSON';
         var movieDbRequest = new RestRequest();
         movieDbRequest.endPoint = '/movie/' + movieDbMovie.id;
         var promiseToReturn = new Promise<Movie>(resolve => {
@@ -25,14 +27,41 @@ export class OmdbService {
                 omdbRequest.parameters['tomatoes'] = 'true';
                 this._omdbRest.executeRequest<OmdbMovie>(omdbRequest).then(omdbMovie => {
                     window.console.log('MOVIEDB: '+ omdbMovie);
-                    movieDbMovie.imdbRating = omdbMovie.imdbRating;
-                    movieDbMovie.metaRating = omdbMovie.Metascore;
-                    movieDbMovie.tomatoRating = omdbMovie.tomatoRating;
-                    movieDbMovie.tomatoUserRating = omdbMovie.tomatoUserRating;
+                    
+                    var imdbRating = +omdbMovie.imdbRating;
+                    var metaRating = +omdbMovie.Metascore / 10;
+                    var tomatoCriticRating =  +omdbMovie.tomatoMeter / 10;
+                    var tomatoUserRating = +omdbMovie.tomatoUserMeter / 10;
+                    var superRating = this.getSuperRating([imdbRating, metaRating, tomatoUserRating]);
+                    
+                    window.console.log('IMDB'+imdbRating);
+                    window.console.log('IMDB'+imdbRating);
+                    movieDbMovie.imdbRating = imdbRating;
+                    movieDbMovie.metaRating = metaRating;
+                    movieDbMovie.tomatoCriticRating = tomatoCriticRating;
+                    movieDbMovie.tomatoUserRating = tomatoUserRating;
+                    movieDbMovie.year = +omdbMovie.Year;
+                    movieDbMovie.genre = omdbMovie.Genre.split(',');
+                    movieDbMovie.superRating = superRating;
+                   window.console.log('SUPER!!!! '+movieDbMovie.superRating);
                     resolve(movieDbMovie);
                 });
         });
         return promiseToReturn;
+    }
+    
+    private getSuperRating(ratings: number[]): number {
+        var toReturn: number = 0;
+        var ratingsAddedToCollection = 0;
+        ratings.forEach(rating => {
+            if (rating != null) {
+                toReturn += rating;
+                ratingsAddedToCollection++;
+            }
+        });
+        if (ratingsAddedToCollection == 0)
+            return undefined;
+        return +(toReturn / ratingsAddedToCollection).toFixed(2);
     }
     
 }

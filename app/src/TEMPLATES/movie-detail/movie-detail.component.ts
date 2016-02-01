@@ -13,12 +13,15 @@ export class MovieDetail implements OnInit {
     private movie: Movie;
     
     ngOnInit(){
-        window.console.log('INITAILIZED Movie Detail');
+        
+        
     }
     
     close = new EventEmitter();
     
     closeDetails() {
+        window.console.log(this.movie);
+        window.console.log(this.movie.superRating);
         window.console.log('CLose Details from Detail');
         this.close.emit("event");
     }

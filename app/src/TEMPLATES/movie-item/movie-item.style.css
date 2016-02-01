@@ -21,3 +21,15 @@
 .rating {
     position: absolute;
 }
+
+.superRating {
+    color: red;
+}
+
+.imdbRating {
+    color: yellow;
+}
+
+.metaRating {
+    color: black;
+}

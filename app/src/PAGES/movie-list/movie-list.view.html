@@ -6,7 +6,7 @@
     </movie-detail>
     <div class="overlay"></div>
     <movie-item *ngFor="#movie of myMovies" 
-        (click)="showDetails(movie)" 
+        (click)="showDetails(movie.id)" 
         [movie]="movie">
     </movie-item>
     

@@ -18,7 +18,7 @@ System.register(['angular2/platform/browser', './app.component', 'angular2/route
                 services_export_1 = services_export_1_1;
             }],
         execute: function() {
-            browser_1.bootstrap(app_component_1.AppComponent, [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, services_export_1.RestApiService]);
+            browser_1.bootstrap(app_component_1.AppComponent, [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, services_export_1.RestApiService, services_export_1.OmdbService]);
         }
     }
 });

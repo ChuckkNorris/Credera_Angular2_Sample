@@ -21,9 +21,10 @@ System.register(['angular2/core'], function(exports_1) {
                     this.close = new core_1.EventEmitter();
                 }
                 MovieDetail.prototype.ngOnInit = function () {
-                    window.console.log('INITAILIZED Movie Detail');
                 };
                 MovieDetail.prototype.closeDetails = function () {
+                    window.console.log(this.movie);
+                    window.console.log(this.movie.superRating);
                     window.console.log('CLose Details from Detail');
                     this.close.emit("event");
                 };

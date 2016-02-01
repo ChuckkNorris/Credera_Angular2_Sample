@@ -32,6 +32,8 @@ System.register(['angular2/core', './rest-api.service'], function(exports_1) {
                 // - GET MOVIE - //
                 OmdbService.prototype.getFullMovieDetails = function (movieDbMovie) {
                     var _this = this;
+                    this._omdbRest.baseUrl = OMDB_BASE_URL;
+                    this._omdbRest.globalParameters['r'] = 'JSON';
                     var movieDbRequest = new rest_api_service_1.RestRequest();
                     movieDbRequest.endPoint = '/movie/' + movieDbMovie.id;
                     var promiseToReturn = new Promise(function (resolve) {
@@ -40,14 +42,38 @@ System.register(['angular2/core', './rest-api.service'], function(exports_1) {
                         omdbRequest.parameters['tomatoes'] = 'true';
                         _this._omdbRest.executeRequest(omdbRequest).then(function (omdbMovie) {
                             window.console.log('MOVIEDB: ' + omdbMovie);
-                            movieDbMovie.imdbRating = omdbMovie.imdbRating;
-                            movieDbMovie.metaRating = omdbMovie.Metascore;
-                            movieDbMovie.tomatoRating = omdbMovie.tomatoRating;
-                            movieDbMovie.tomatoUserRating = omdbMovie.tomatoUserRating;
+                            var imdbRating = +omdbMovie.imdbRating;
+                            var metaRating = +omdbMovie.Metascore / 10;
+                            var tomatoCriticRating = +omdbMovie.tomatoMeter / 10;
+                            var tomatoUserRating = +omdbMovie.tomatoUserMeter / 10;
+                            var superRating = _this.getSuperRating([imdbRating, metaRating, tomatoUserRating]);
+                            window.console.log('IMDB' + imdbRating);
+                            window.console.log('IMDB' + imdbRating);
+                            movieDbMovie.imdbRating = imdbRating;
+                            movieDbMovie.metaRating = metaRating;
+                            movieDbMovie.tomatoCriticRating = tomatoCriticRating;
+                            movieDbMovie.tomatoUserRating = tomatoUserRating;
+                            movieDbMovie.year = +omdbMovie.Year;
+                            movieDbMovie.genre = omdbMovie.Genre.split(',');
+                            movieDbMovie.superRating = superRating;
+                            window.console.log('SUPER!!!! ' + movieDbMovie.superRating);
                             resolve(movieDbMovie);
                         });
                     });
                     return promiseToReturn;
+                };
+                OmdbService.prototype.getSuperRating = function (ratings) {
+                    var toReturn = 0;
+                    var ratingsAddedToCollection = 0;
+                    ratings.forEach(function (rating) {
+                        if (rating != null) {
+                            toReturn += rating;
+                            ratingsAddedToCollection++;
+                        }
+                    });
+                    if (ratingsAddedToCollection == 0)
+                        return undefined;
+                    return +(toReturn / ratingsAddedToCollection).toFixed(2);
                 };
                 OmdbService = __decorate([
                     core_1.Injectable(), 
