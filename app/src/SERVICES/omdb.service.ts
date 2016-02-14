@@ -26,24 +26,22 @@ export class OmdbService {
                 omdbRequest.parameters['i'] = movieDbMovie.imdb_id;
                 omdbRequest.parameters['tomatoes'] = 'true';
                 this._omdbRest.executeRequest<OmdbMovie>(omdbRequest).then(omdbMovie => {
-                    window.console.log('MOVIEDB: '+ omdbMovie);
-                    
-                    var imdbRating = +omdbMovie.imdbRating;
-                    var metaRating = +omdbMovie.Metascore / 10;
-                    var tomatoCriticRating =  +omdbMovie.tomatoMeter / 10;
-                    var tomatoUserRating = +omdbMovie.tomatoUserMeter / 10;
-                    var superRating = this.getSuperRating([imdbRating, metaRating, tomatoUserRating]);
-                    
-                    window.console.log('IMDB'+imdbRating);
-                    window.console.log('IMDB'+imdbRating);
-                    movieDbMovie.imdbRating = imdbRating;
-                    movieDbMovie.metaRating = metaRating;
-                    movieDbMovie.tomatoCriticRating = tomatoCriticRating;
-                    movieDbMovie.tomatoUserRating = tomatoUserRating;
-                    movieDbMovie.year = +omdbMovie.Year;
-                    movieDbMovie.genre = omdbMovie.Genre.split(',');
-                    movieDbMovie.superRating = superRating;
-                   window.console.log('SUPER!!!! '+movieDbMovie.superRating);
+                    if (omdbMovie != null){
+                        var imdbRating = +omdbMovie.imdbRating;
+                        var metaRating = +omdbMovie.Metascore / 10;
+                        var tomatoCriticRating =  +omdbMovie.tomatoMeter / 10;
+                        var tomatoUserRating = +omdbMovie.tomatoUserMeter / 10;
+                        var superRating = this.getSuperRating([imdbRating, metaRating, tomatoUserRating]);
+
+                        movieDbMovie.imdbRating = imdbRating;
+                        movieDbMovie.metaRating = metaRating;
+                        movieDbMovie.tomatoCriticRating = tomatoCriticRating;
+                        movieDbMovie.tomatoUserRating = tomatoUserRating;
+                        movieDbMovie.year = +omdbMovie.Year;
+                        if (omdbMovie.Genre != undefined)
+                            movieDbMovie.genre = omdbMovie.Genre.split(',');
+                        movieDbMovie.superRating = superRating;
+                    }
                     resolve(movieDbMovie);
                 });
         });
@@ -51,6 +49,8 @@ export class OmdbService {
     }
     
     private getSuperRating(ratings: number[]): number {
+        if (ratings == null)
+            return undefined;
         var toReturn: number = 0;
         var ratingsAddedToCollection = 0;
         ratings.forEach(rating => {

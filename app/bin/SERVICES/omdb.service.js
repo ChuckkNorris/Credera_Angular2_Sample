@@ -41,28 +41,29 @@ System.register(['angular2/core', './rest-api.service'], function(exports_1) {
                         omdbRequest.parameters['i'] = movieDbMovie.imdb_id;
                         omdbRequest.parameters['tomatoes'] = 'true';
                         _this._omdbRest.executeRequest(omdbRequest).then(function (omdbMovie) {
-                            window.console.log('MOVIEDB: ' + omdbMovie);
-                            var imdbRating = +omdbMovie.imdbRating;
-                            var metaRating = +omdbMovie.Metascore / 10;
-                            var tomatoCriticRating = +omdbMovie.tomatoMeter / 10;
-                            var tomatoUserRating = +omdbMovie.tomatoUserMeter / 10;
-                            var superRating = _this.getSuperRating([imdbRating, metaRating, tomatoUserRating]);
-                            window.console.log('IMDB' + imdbRating);
-                            window.console.log('IMDB' + imdbRating);
-                            movieDbMovie.imdbRating = imdbRating;
-                            movieDbMovie.metaRating = metaRating;
-                            movieDbMovie.tomatoCriticRating = tomatoCriticRating;
-                            movieDbMovie.tomatoUserRating = tomatoUserRating;
-                            movieDbMovie.year = +omdbMovie.Year;
-                            movieDbMovie.genre = omdbMovie.Genre.split(',');
-                            movieDbMovie.superRating = superRating;
-                            window.console.log('SUPER!!!! ' + movieDbMovie.superRating);
+                            if (omdbMovie != null) {
+                                var imdbRating = +omdbMovie.imdbRating;
+                                var metaRating = +omdbMovie.Metascore / 10;
+                                var tomatoCriticRating = +omdbMovie.tomatoMeter / 10;
+                                var tomatoUserRating = +omdbMovie.tomatoUserMeter / 10;
+                                var superRating = _this.getSuperRating([imdbRating, metaRating, tomatoUserRating]);
+                                movieDbMovie.imdbRating = imdbRating;
+                                movieDbMovie.metaRating = metaRating;
+                                movieDbMovie.tomatoCriticRating = tomatoCriticRating;
+                                movieDbMovie.tomatoUserRating = tomatoUserRating;
+                                movieDbMovie.year = +omdbMovie.Year;
+                                if (omdbMovie.Genre != undefined)
+                                    movieDbMovie.genre = omdbMovie.Genre.split(',');
+                                movieDbMovie.superRating = superRating;
+                            }
                             resolve(movieDbMovie);
                         });
                     });
                     return promiseToReturn;
                 };
                 OmdbService.prototype.getSuperRating = function (ratings) {
+                    if (ratings == null)
+                        return undefined;
                     var toReturn = 0;
                     var ratingsAddedToCollection = 0;
                     ratings.forEach(function (rating) {

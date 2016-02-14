@@ -23,16 +23,15 @@ export class MovieList implements OnInit {
     }
     
     private selectedMovie:Movie;
-    showDetails(movieId: number){
-        console.log('SHOW ME THE DETAILS!');
-         this._movieDb.getFullMovieDetails(movieId.toString()).then(movie => 
-            this.selectedMovie = movie
-         );
+    showDetails(mdbMovie: Movie){
+         this._movieDb.getFullMovieDetails(mdbMovie).then(movie => {
+            this.selectedMovie = movie;
+            console.log(movie);
+        });
         
     }
     
     closeDetails(){
-        console.log('Close details from movie list');
         this.selectedMovie = undefined;
     }
    
@@ -40,9 +39,8 @@ export class MovieList implements OnInit {
     private nextPage:number = 1;
     getNextPageOfTopMovies(){
         this._movieDb.getTopMovies(this.nextPage).then(movies => {
-            window.console.log('GETTING PAGE: ' + this.nextPage);
                 movies.forEach(movie => {
-                    this._movieDb.getFullMovieDetails(movie.id.toString()).then(fullMovie => 
+                    this._movieDb.getFullMovieDetails(movie).then(fullMovie => 
                         this.myMovies.push(fullMovie)
                     );
                 })
@@ -55,7 +53,6 @@ export class MovieList implements OnInit {
         var currentScrollPosition: number = scroll.clientHeight + scroll.scrollTop;
         var maxScrollPosition: number = scroll.scrollHeight;
         if (currentScrollPosition >= (.9 * maxScrollPosition)) {
-            window.console.log('GETTTING MOVIES: ' + this.nextPage);
             this.getNextPageOfTopMovies();
         }
     }

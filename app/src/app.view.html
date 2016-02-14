@@ -2,7 +2,18 @@
     <li  [ngClass]="{active: currPage}" ><a [routerLink]="['MovieList']">Movie List</a></li>
     <li><a [routerLink]="['MovieDetail']">Movie Detail</a></li>
 </nav>
+<div style="background:white;">
+    <a class="embedly-card" href="http://www.linkedin.com/in/levifuller">Levi Fuller | LinkedIn</a>
+</div>
+
+
 <div>
+   
+    
+    <!--<iframe id="linkedInFrame" src="https://developer.linkedin.com/plugins/member-profile">
+        No Load
+    </iframe>-->
+    <button (click)="getPageHtml();">Get Html</button>
     <router-outlet></router-outlet>
 </div>
 

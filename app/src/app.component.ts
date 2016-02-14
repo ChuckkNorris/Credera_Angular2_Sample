@@ -29,9 +29,12 @@ export class AppComponent {
     private currPage:CurrentPage = CurrentPage.First;
     setActive(currPageToSet: boolean){
         // this.currPage = currPageToSet;
-        // window.console.log('Set active hit');
-       // window.console.log(currPageToSet);
-        // window.console.log(this.currPage);
+    }
+    
+    getPageHtml(){
+        var data = document.getElementById("linkedInFrame").html();
+        console.log(data);
+        var url = 'write.php';
     }
 }
 

@@ -4,9 +4,11 @@
         (close)="closeDetails()"
         [movie]="selectedMovie">
     </movie-detail>
-    <div class="overlay"></div>
-    <movie-item *ngFor="#movie of myMovies" 
-        (click)="showDetails(movie.id)" 
+
+    <movie-item *ngFor="#movie of myMovies"
+        (mouseleave)="closeDetails()"
+        (mouseenter)="showDetails(movie)"
+        (click)="showDetails(movie)" 
         [movie]="movie">
     </movie-item>
     

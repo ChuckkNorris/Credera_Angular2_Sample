@@ -17,7 +17,6 @@ export class RestApiService {
         if (v.lastIndexOf('/') == v.length - 1)
             v = v.substr(0, v.length - 1);
         this._baseUrl = v;
-        window.console.log(this._baseUrl);
     }
     
     
@@ -25,7 +24,6 @@ export class RestApiService {
         var getStatement = this._http.get(this.getFullUrl(request));
         var promiseToReturn = new Promise<T>(resolve => 
             getStatement.subscribe((response => {
-                window.console.log(response.json());
                 resolve(<T>response.json());
             })));
         return promiseToReturn;
@@ -38,7 +36,6 @@ export class RestApiService {
             toReturn += restRequest.endPoint
         toReturn += this.getQueryString(restRequest.parameters);
       
-        window.console.log('REST URL: ' + toReturn);
         return toReturn;
     }
     
@@ -75,7 +72,6 @@ export class RestRequest{
          if (v.charAt(0) != '/')
             v = '/' + v;
          this._endPoint = v;
-         window.console.log('ENDPOINT: ' + this._endPoint);
      }
      
 }

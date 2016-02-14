@@ -37,19 +37,11 @@ System.register(['angular2/core', './rest-api.service', './omdb.service'], funct
                     this._movieDbRest.baseUrl = MOVIE_DB_BASE_URL;
                 };
                 // - GET MOVIE - //
-                MovieDbService.prototype.getFullMovieDetails = function (id) {
+                MovieDbService.prototype.getFullMovieDetails = function (mdbMovie) {
                     var _this = this;
-                    this._movieDbRest.baseUrl = MOVIE_DB_BASE_URL;
-                    var movieDbRequest = new rest_api_service_1.RestRequest();
-                    movieDbRequest.endPoint = '/movie/' + id;
                     var promiseToReturn = new Promise(function (resolve) {
-                        return _this._movieDbRest.executeRequest(movieDbRequest).then(function (movieResponse) {
-                            window.console.log('MOVIEDB: ' + movieResponse);
-                            var movieDbMovie = _this.convertToMovie(movieResponse);
-                            _this._omdbService.getFullMovieDetails(movieDbMovie).then(function (toReturn) {
-                                console.log(toReturn);
-                                resolve(toReturn);
-                            });
+                        _this._omdbService.getFullMovieDetails(mdbMovie).then(function (toReturn) {
+                            resolve(toReturn);
                         });
                     });
                     return promiseToReturn;

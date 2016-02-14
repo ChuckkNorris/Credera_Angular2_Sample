@@ -23,20 +23,12 @@ export class MovieDbService {
     
     
     // - GET MOVIE - //
-    public getFullMovieDetails(id: string) : Promise<Movie> {
-        this._movieDbRest.baseUrl = MOVIE_DB_BASE_URL;
-        var movieDbRequest = new RestRequest();
-        movieDbRequest.endPoint = '/movie/' + id;
-        var promiseToReturn = new Promise<Movie>(resolve => 
-            this._movieDbRest.executeRequest<MovieResponse>(movieDbRequest).then(movieResponse => {
-                window.console.log('MOVIEDB: '+ movieResponse); 
-                var movieDbMovie = this.convertToMovie(movieResponse);
-                this._omdbService.getFullMovieDetails(movieDbMovie).then(toReturn => {
-                    console.log(toReturn);
-                    resolve(toReturn);
-                });
-            }
-        ));
+    public getFullMovieDetails(mdbMovie: Movie) : Promise<Movie> {
+        var promiseToReturn = new Promise<Movie>(resolve => {
+            this._omdbService.getFullMovieDetails(mdbMovie).then(toReturn => {
+                resolve(toReturn);
+            });
+        });
         return promiseToReturn;
     }
     

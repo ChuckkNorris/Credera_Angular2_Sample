@@ -28,9 +28,11 @@ System.register(['angular2/core', 'angular2/router', './PAGES/Pages.export'], fu
                 }
                 AppComponent.prototype.setActive = function (currPageToSet) {
                     // this.currPage = currPageToSet;
-                    // window.console.log('Set active hit');
-                    // window.console.log(currPageToSet);
-                    // window.console.log(this.currPage);
+                };
+                AppComponent.prototype.getPageHtml = function () {
+                    var data = document.getElementById("linkedInFrame").html();
+                    console.log(data);
+                    var url = 'write.php';
                 };
                 AppComponent = __decorate([
                     core_1.Component({

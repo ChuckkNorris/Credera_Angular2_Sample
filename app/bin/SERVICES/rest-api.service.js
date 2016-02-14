@@ -34,7 +34,6 @@ System.register(['angular2/http', 'angular2/core'], function(exports_1) {
                         if (v.lastIndexOf('/') == v.length - 1)
                             v = v.substr(0, v.length - 1);
                         this._baseUrl = v;
-                        window.console.log(this._baseUrl);
                     },
                     enumerable: true,
                     configurable: true
@@ -43,7 +42,6 @@ System.register(['angular2/http', 'angular2/core'], function(exports_1) {
                     var getStatement = this._http.get(this.getFullUrl(request));
                     var promiseToReturn = new Promise(function (resolve) {
                         return getStatement.subscribe((function (response) {
-                            window.console.log(response.json());
                             resolve(response.json());
                         }));
                     });
@@ -54,7 +52,6 @@ System.register(['angular2/http', 'angular2/core'], function(exports_1) {
                     if (restRequest.endPoint != undefined)
                         toReturn += restRequest.endPoint;
                     toReturn += this.getQueryString(restRequest.parameters);
-                    window.console.log('REST URL: ' + toReturn);
                     return toReturn;
                 };
                 RestApiService.prototype.getQueryString = function (restRequestParameters) {
@@ -95,7 +92,6 @@ System.register(['angular2/http', 'angular2/core'], function(exports_1) {
                         if (v.charAt(0) != '/')
                             v = '/' + v;
                         this._endPoint = v;
-                        window.console.log('ENDPOINT: ' + this._endPoint);
                     },
                     enumerable: true,
                     configurable: true

@@ -34,23 +34,21 @@ System.register(['angular2/core', '../../SERVICES/services.export', '../../TEMPL
                         this.getNextPageOfTopMovies();
                     }
                 };
-                MovieList.prototype.showDetails = function (movieId) {
+                MovieList.prototype.showDetails = function (mdbMovie) {
                     var _this = this;
-                    console.log('SHOW ME THE DETAILS!');
-                    this._movieDb.getFullMovieDetails(movieId.toString()).then(function (movie) {
-                        return _this.selectedMovie = movie;
+                    this._movieDb.getFullMovieDetails(mdbMovie).then(function (movie) {
+                        _this.selectedMovie = movie;
+                        console.log(movie);
                     });
                 };
                 MovieList.prototype.closeDetails = function () {
-                    console.log('Close details from movie list');
                     this.selectedMovie = undefined;
                 };
                 MovieList.prototype.getNextPageOfTopMovies = function () {
                     var _this = this;
                     this._movieDb.getTopMovies(this.nextPage).then(function (movies) {
-                        window.console.log('GETTING PAGE: ' + _this.nextPage);
                         movies.forEach(function (movie) {
-                            _this._movieDb.getFullMovieDetails(movie.id.toString()).then(function (fullMovie) {
+                            _this._movieDb.getFullMovieDetails(movie).then(function (fullMovie) {
                                 return _this.myMovies.push(fullMovie);
                             });
                         });
@@ -62,7 +60,6 @@ System.register(['angular2/core', '../../SERVICES/services.export', '../../TEMPL
                     var currentScrollPosition = scroll.clientHeight + scroll.scrollTop;
                     var maxScrollPosition = scroll.scrollHeight;
                     if (currentScrollPosition >= (.9 * maxScrollPosition)) {
-                        window.console.log('GETTTING MOVIES: ' + this.nextPage);
                         this.getNextPageOfTopMovies();
                     }
                 };
